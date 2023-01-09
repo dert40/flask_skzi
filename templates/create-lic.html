@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Новая лицензия
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+<h1>Добавление лицензии</h1>
+    <form method="post">
+        <input type="text" name="fio" id="fio" class="form-control" placeholder="Введите ФИО"><br>
+        <input type="text" name="computer_name" id="computer_name" class="form-control" placeholder="Введите имя компьютера"><br>
+        <input type="text" name="license_code" id="license_code" class="form-control" placeholder="Введите код лицензии"><br>
+        <input type="text" name="contract" id="contract" class="form-control" placeholder="Введите контракт"><br>
+        <input type="text" name="comment" id="comment" class="form-control" placeholder="Введите контракт"><br>
+        <input type="text" name="code" id="code" class="form-control" placeholder="Введите код"><br>
+
+        <textarea name="intro" id="intro" class="form-control" placeholder="Введите анонс"></textarea><br>
+        <textarea name="text" id="text" class="form-control" placeholder="Введите основной текст"></textarea><br>
+        <p><input type="search" list="character" class="form-control">
+            <datalist id="character">
+                {% for opt in option %}
+                    <option value="{{ opt.id }}">"{{ opt.division_name }}"</option>
+                {% endfor %}
+            </datalist>
+        </p>
+
+         <p>
+             <select name="list_name">
+                {% for opt in option %}
+                    <option value="{{ opt.id }}">{{ opt.division_name }}</option>
+                {% endfor %}
+             </select>
+         </p>
+
+        <input type="submit" class="btn btn-success" value="Отправить">
+    </form>
+
+</div>
+{% endblock %}

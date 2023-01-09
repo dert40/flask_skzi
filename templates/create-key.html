@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Новая ключ
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="card">
+    <form method="post">
+      <!-- Card header -->
+      <div class="card-header">
+        <h4 class="fw-bold">Новый ключ</h4>
+      </div>
+
+      <!-- Card body -->
+      <div class="card-body">
+
+<!--        <div class="mb-3">-->
+<!--            <label for="ud_centr" class="form-label">Удостоверяющий центр</label>-->
+<!--            <input type="text" name="ud_centr" class="form-control" id="ud_centr" placeholder="Удостоверяющий центр"/>-->
+<!--          </div>-->
+        <div class="mb-3">
+            <label for="ud_centr" class="form-label"
+                   >Удостоверяющий центр</label
+              >
+            <p>
+            <select name="ud_centr" class="form-control">
+                {% for spis in spis_centr %}
+                    <option value="{{ spis.id }}">{{ spis.CERTIFICATION_CENTER }}</option>
+                {% endfor %}
+             </select>
+            </p>
+        </div>
+
+ <div class="row">
+          <div class="col-md-2">
+              <div class="mb-6">
+                <label for="data" name="data" class="form-label">Действует по:</label>
+                <input type="date" name="data_stop" class="form-control" id="data_stop" placeholder="Дата"/>
+              </div>
+            </div>
+<!--            -->
+                   <div class="col-md-10">
+                <div class="mb-3">
+                  <label for="division" class="form-label">Кто выдал</label>
+                <p>
+            <select name="division" class="form-control">
+                {% for el in spis_div %}
+                    <option value="{{ el.id }}">{{ el.division_name }}</option>
+                {% endfor %}
+             </select>
+            </p>
+
+                </div>
+              </div>
+
+</div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="rezen"  class="form-label">Примечание</label>
+                  <input type="text" name="rezen" class="form-control" id="rezen" placeholder="Примечание"/>
+                </div>
+              </div>
+           <div class="col-md-6">
+              <div class="mb-3">
+                <label for="gost" name="gost" class="form-label">ГОСТ</label>
+                <input type="text" name="gost" class="form-control" id="gost" placeholder="ГОСТ"/>
+              </div>
+          </div>
+
+
+        </div>
+
+         <div class="row">
+
+<!--            <div class="col-md-6">-->
+<!--              <div class="mb-3">-->
+<!--                <label for="comment" class="form-label">Примечание</label>-->
+<!--                <input type="text" name="comment" class="form-control" id="comment" placeholder="Примечание"/>-->
+<!--              </div>-->
+<!--            </div>-->
+      </div>
+
+      </div>
+
+      <!-- Card footer -->
+      <div class="card-footer">
+        <button class="btn btn-danger">Отмена</button>
+<!--        <button type="submit" class="btn btn-primary">Ок</button>-->
+          <input type="submit" class="btn btn-primary" value="Отправить">
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

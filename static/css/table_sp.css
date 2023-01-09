@@ -1,0 +1,163 @@
+  /*  #img_h {
+
+    padding-top: 10px;
+    padding-bottom: 0;
+    padding-right:20;
+    /* padding-left: 50;
+   }*/
+
+	/*	dialog {
+			  margin: 0 auto;
+			  border-width: thin;
+			  border-radius: 10px;
+			  box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+			  background-color: #FFFFFF;
+			  padding-bottom: 0px;
+	}
+	#fn1, #fs1, #fc1, #fn2, #fs2, #fc2{
+			  border-radius: 5px;
+			  border-width: thin;
+	}
+
+	#fs1, #fc1, #fs2, #fc2 {
+				margin-bottom: 0px;
+	}
+		.overlay1{
+				  position: absolute;
+				  display:none;
+				  top: 200px;
+				  left: 10px;
+				  width: 30%;
+				  height: 10%;
+				  z-index: 10;
+	}
+		.overlay2{
+				  position: absolute;
+				  display:none;
+				  top: 200px;
+				  left: 10px;
+				  width: 45%;
+				  height: 10%;
+				  z-index: 10;
+	}*/
+
+/*.open-button {
+              border-radius:50%;
+              color: black;
+              font-size: 15px;
+              font-weight: bold;
+              border: none;
+              cursor: pointer;
+              position: fixed;
+              width: 80px;
+  }*/
+.form-popup {
+              display: none;
+              position: fixed;
+              border-radius: 10px;
+               box-shadow: 10px 10px 10px rgba(0,0,0,.5);
+             /* border-width: thin;*/
+              border: 1px solid #111;
+             /* background: #f1f1f1;*/
+              background-color: #FFFFFF;
+              padding: 20px;
+             /* margin-top: 25px;*/
+              padding-bottom: 0px;
+              z-index: 999;
+  }
+
+ /* #myForm2, #myForm2{
+                margin-top: 60px;
+  }*/
+
+  /*	#fs1 {
+  	          color: black;
+			  border-radius: 5px;
+			  border-width: thin;
+	}*/
+
+
+/*-----------------------*/
+ .container-fluid {
+
+	padding-top: 70px;
+	padding-bottom: 0px;
+   }
+
+   #cont2 {
+
+			padding: 1px; /* Поля вокруг текста */
+			padding-top: 5px;
+			padding-bottom: 5px;
+   }
+   #panel {
+    <!-- background: #ccc; /* Цвет фона */ -->
+   }
+   #panel p {
+    padding-left: 100px;
+    padding: 1px; /* Добавляем поля */
+    margin: 0; /* Убираем отступы у параграфа */
+   }
+   #title {
+    background: #DCDCDC; /* Цвет фона */
+    color: white; /* Цвет текста */
+    border-bottom-width: 0.5px; /* Толщина линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+
+    <!-- border-bottom-color: white; /* Цвет линии внизу */ -->
+   }
+     #panel2 {
+    <!-- background: #ccc; /* Цвет фона */ --> -->
+	 padding-bottom: 0;
+	 margin: 0;
+   }
+      #panel2 p {
+    padding-left: 100px;
+    padding: 5px; /* Добавляем поля */
+    margin: 0; /* Убираем отступы у параграфа */
+   }
+   #title2 {
+    background: #DCDCDC; /* Цвет фона */
+    color: white; /* Цвет текста */
+    border-bottom-width: 0.5px; /* Толщина линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+    /*border-bottom-color: white; /* Цвет линии внизу 830*/
+   }
+   		.tableFixHead          { overflow: auto; height: 830px; }
+   		/*.tableFixHead          { overflow: scroll; height: 740px; }*/
+		.tableFixHead thead th { position: sticky; top: 0; z-index: 1; }
+
+		/* Just common table stuff. Really. */
+		table  { border-collapse: collapse; width: 100%;}
+		/*table  { border-collapse: collapse; width: auto;}*/
+		th, td { padding: 8px 16px; }
+		th     { background:#eee;}
+
+			table {
+					  border-collapse: collapse;
+					}
+
+					.active {
+					  background-color: #DCDCDC;
+					}
+
+					table tbody tr {
+					  cursor: pointer;
+					}
+							tr {
+					        outline: thin dotted;
+							outline-style: solid;
+							outline-color: gray;
+					}
+    .flash {padding: 10px;}
+    .flash.success {
+                    border: 1px solid #21DB56;
+                    background: #AEFFC5;
+    }
+    .flash.error {
+                    border: 1px solid #FF4343;
+                    background: #FF9C9C;
+    }
+
+
+}

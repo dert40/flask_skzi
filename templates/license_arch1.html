@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Список лицензии
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+<h2>Список лицензий</h2>
+
+    {% set ns = namespace(counter=0) %}
+
+    {% if spisok_lic|length >0 %}
+
+<!--        <a class="p-2 text-dark btn btn-outline-warning" href="/get-csv/hel.docx">  Скачать </a>-->
+      <a class="p-2 text-dark btn btn-outline-warning" href="/download">  Скачать </a>
+
+    <table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+      <th class="text-center" scope="col">#</th>
+      <th class="text-center" scope="col">ФИО</th>
+      <th class="text-center" scope="col">Лицензия</th>
+      <th class="text-center" scope="col">Дата</th>
+    </tr>
+   <tbody>
+      {% for el in spisok_lic %}
+       {% set ns.counter = ns.counter+1 %}
+      <tr>
+        <th class="text-center" scope="row">{{ ns.counter }}</th>
+<!--        <td>{{ el.fio }}</td>-->
+          <td><a href="/license/{{ el.id }}">{{ el.fio }}</a></td>
+<!--          <td>{{ el.id }}</td>-->
+        <td>{{ el.license_code }}</td>
+        <td>{{ el.date_start }}</td>
+      </tr>
+    {% endfor %}
+
+      {% else %}
+    <p>Нет лицензий на сайте</p>
+    {% endif %}
+    </tbody>
+  </thead>
+</table>
+</div>
+{% endblock %}>

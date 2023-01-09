@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Журнал СКЗИ</title>
+		<meta name="description" content="Сетка во весь экран">
+		<!-- CSS -->
+
+        <!-- JS -->
+<!--		<script src='./js/gallery.js'></script>-->
+<!--		<script src='./js/lazyloading.js'></script>-->
+        <!-- FONTS -->
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700' rel='stylesheet' type='text/css'>
+                <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}" />
+<!--        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />-->
+
+
+<!--        <link rel="stylesheet" href="{{ url_for('static', filename='css/table_sp.css') }}">-->
+
+        <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+
+    <title>{% block title %}{% endblock %}</title>
+	<script>
+		  window.onload = function() {
+		  let id = {{ str_id }};
+		  let cont='';
+		  let a = $("#samples_data_table").width();
+          s = a + 'px';
+          document.getElementById("secnav").style.width = s;
+
+		if (id > 0){
+			 cont = '#'+ String (id);
+			 jQuery(cont).addClass('active').siblings().removeClass('active');
+         //    jQuery('#9').addClass('active').siblings().removeClass('active');
+
+        };
+
+}
+	</script>
+    </head>
+	<body>
+<!-- HEADER -->
+	<header>
+		<div class="logo">
+			<a href="#"><img id="logo" src="{{ url_for('static', filename='img/gerb.png') }}">
+				<p><span data-tooltip="Подсказка номер 1">Журнал средств СКЗИ</span>  {% if sp|length >0 %} - <span class="c_mark"> {{ sp|length }} </span>{% else %} - 0 {% endif %}</p>
+			</a>
+		</div>
+	</header>
+<!-- MENU -->
+<!--	<section id="secnav">-->
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;color" href="/create-skzi" role="button" >Создать</a>-->
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#" role="button" onclick="fnselD()">Копировать</a>-->
+<!--&lt;!&ndash;		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#" role="button" onclick="fnTest()">Test</a>&ndash;&gt;-->
+<!--&lt;!&ndash;		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#" role="button" onclick="fnRow()">Выделить</a>&ndash;&gt;-->
+
+<!--&lt;!&ndash;		<div class="modal-target" id="copy">&ndash;&gt;-->
+<!--&lt;!&ndash;			<div class="cmt">&ndash;&gt;-->
+<!--&lt;!&ndash;				<p>Копировать строку в таблице?</p>&ndash;&gt;-->
+<!--&lt;!&ndash;				<a class="button" type="submit" id="fs2">Копировать</a>&ndash;&gt;-->
+<!--&lt;!&ndash;				<a href="#close" class="button">Закрыть</a>&ndash;&gt;-->
+<!--&lt;!&ndash;			</div>&ndash;&gt;-->
+<!--&lt;!&ndash;			<a href="#close" class="modal-close"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;		</div>&ndash;&gt;-->
+
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#" role="button" onclick="fnDelitDn()">Удалить</a>-->
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="/download-skzi" role="button">Скачать</a>-->
+<!--&lt;!&ndash;		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#"  onclick="wd_Test()" role="button">Test</a>&ndash;&gt;-->
+<!--&lt;!&ndash;        <form class="form-inline">&ndash;&gt;-->
+
+<!--&lt;!&ndash;			<form >&ndash;&gt;-->
+<!--		    	<input type="search" class="form__field" placeholder="Поиск" />-->
+<!--		    	<button type="button" class="btnf btnf&#45;&#45;primary btnf&#45;&#45;color btnf&#45;&#45;inside uppercase">Найти</button>-->
+<!--&lt;!&ndash;			</form>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </form>&ndash;&gt;-->
+<!--&lt;!&ndash;		<a class="fadd" href="/adv-search"> Расширенный поиск</a>&ndash;&gt;-->
+<!--&lt;!&ndash;		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="/adv-search" role="button" ><img src="{{ url_for('static', filename='img/find_.png') }}" width="30" height="30"></a>&ndash;&gt;-->
+<!--		<a href="/adv-search" class="find_a"> <span data-tooltip="Расширенный поиск"><img src="{{ url_for('static', filename='img/find_.png') }}" width="32" height="32"></span></a>-->
+<!--		<a href="/list" class="clean_f"> <span data-tooltip="Очистить фильты"><img src="{{ url_for('static', filename='img/clean_f2.png') }}" width="32" height="32"></span></a>-->
+
+<!--	</section>-->
+<section id="secnav" style="width: 2069.77px;">
+		<a class="btnf btn--primary btnf--color" href="/create-skzi" role="button">Создать</a>
+		<a class="btnf btn--primary btnf--white" href="#" role="button" onclick="fnselD()">Копировать</a>
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#" role="button" onclick="fnTest()">Test</a>-->
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#" role="button" onclick="fnRow()">Выделить</a>-->
+
+<!--		<div class="modal-target" id="copy">-->
+<!--			<div class="cmt">-->
+<!--				<p>Копировать строку в таблице?</p>-->
+<!--				<a class="button" type="submit" id="fs2">Копировать</a>-->
+<!--				<a href="#close" class="button">Закрыть</a>-->
+<!--			</div>-->
+<!--			<a href="#close" class="modal-close"></a>-->
+<!--		</div>-->
+
+		<a class="btnf btn--primary btnf--white" href="#" role="button" onclick="fnDelitDn()">Удалить</a>
+		<a class="btnf btn--primary btnf--white" href="/download-skzi" role="button">Скачать</a>
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="#"  onclick="wd_Test()" role="button">Test</a>-->
+<!--        <form class="form-inline">-->
+
+<!--	<form>-->
+<!--&lt;!&ndash;		    	<input type="search" class="form__field" placeholder="Поиск" name="q" value="{{ request.args.get('q', '') }}">&ndash;&gt;-->
+<!--&lt;!&ndash;		    	<button type="button" class="btnf btnf&#45;&#45;primary btnf&#45;&#45;color btnf&#45;&#45;inside uppercase" type="submit">Найти111</button>&ndash;&gt;-->
+<!--		    <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Поиск" name="q" value="{{ request.args.get('q', '') }}">-->
+<!--		<button class="btnf btnf&#45;&#45;primary btnf&#45;&#45;color btnf&#45;&#45;inside uppercase" type="submit">Найти111</button>-->
+
+<!--&lt;!&ndash;        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>&ndash;&gt;-->
+<!--	</form>-->
+
+<!--	-->
+	<form>
+		    	<input type="search" class="form__field" placeholder="Поиск" name="q" value="{{ request.args.get('q', '') }}">
+		    	<button type="submit" class="btnf btnf--primary btnf--color btnf--inside uppercase">
+				Найти
+				</button>
+		<a href="/adv-search" class="btnfadd find btnf--color"> <span data-tooltip="Расширенный поиск" flow="down"><img src="/static/img/find_.png"></span></a>
+	</form>
+
+
+<!--        </form>-->
+<!--		<a class="fadd" href="/adv-search"> Расширенный поиск</a>-->
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;white" href="/adv-search" role="button" ><img src="/static/img/find_.png" width="30" height="30"></a>-->
+
+
+		<a href="/list" class="find btnfdell btnf--color"> <span data-tooltip="Очистить фильтры" flow="down"><img src="/static/img/findell.png"></span></a>
+		<a class="btnf btn--primary btnf--white" href="#" role="button" onclick="Test_Col()">Тест</a>
+	    <a class="btnf btn--primary btnf--white" href="{{ url_for('admin.index') }}" role="button" >Админка</a>
+	</section>
+
+
+<!-- TABLE -->
+
+   {% block body %}{% endblock %}
+
+
+<div class="modal" data-modal="1" id="mdl_1">
+	<div class="outer">
+  		<span class="inner">
+    		<h3>Копировать строку?</h3>
+  		</span>
+	</div>
+
+	<div class="dat3">
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;color" href="#" role="button" onclick="fnClose(\''mdl_1'\')">Отмена</a>-->
+		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;color" href="#" role="button" onclick="fnClose(1)">Отмена</a>
+		<span id="where_to_ins_1"></span>
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;color" href="/create-skzi" role="button" >Создать</a>-->
+	</div>
+
+</div>
+
+<div class="modal" data-modal="2" id="mdl_2" >
+<!--	<div class="outer" style="background-color: rgba(252, 173, 169, 0.5);">-->
+		<div class="outer" style="background-color: rgba(255, 156, 156, 0.9);">
+  		<span class="inner" >
+    		<h3>Удалить строку?</h3>
+  		</span>
+	</div>
+
+	<div class="dat3">
+		<a class="btnf btn--primary btnf--color" href="#" role="button" onclick="fnClose(2)">Отмена</a>
+		<span id="where_to_ins_2"></span>
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;color" href="/create-skzi" role="button" >Создать</a>-->
+	</div>
+
+</div>
+
+<div class="modal" data-modal="3" id="mdl_3">
+	<div class="outer">
+  		<span class="inner">
+    		<h3>Выделите строку в таблице!</h3>
+  		</span>
+	</div>
+
+	<div class="dat3">
+<!--		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;color" href="#" role="button" onclick="fnClose(\''mdl_1'\')">Отмена</a>-->
+		<a class="btnf btn&#45;&#45;primary btnf&#45;&#45;color" href="#" role="button" onclick="fnClose(3)">Ок</a>
+	</div>
+
+</div>
+
+
+<!-- Подложка под модальным окном -->
+<div class="overlay js-overlay-modal"></div>
+<!-- Для вплывающих окон -->
+<div id="tooltip"></div>
+
+<!-- TABLE -->
+<script src="{{ url_for('static', filename='js/jquery-3.6.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/qwerty.js') }}"></script>
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/for_sp.js') }}"></script>
+
+    </body>
+</html>

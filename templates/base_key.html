@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<!--    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">-->
+   <!-- Только CSS -->
+
+<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+<!--   <link rel="stylesheet" href="/static/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+     <img class="mb-2" src="/static/img/contract.png" alt="" width="30" height="30">
+  <h5 class="my-0 mr-md-auto font-weight-normal">&nbsp; Ключи ЭП</h5>
+  <nav class="my-2 my-md-0 mr-md-3">
+<!--    <a class="p-2 text-dark" href="/">Главная</a>-->
+<!--    <a class="p-2 text-dark" href="{{ url_for('register') }}">Регистрация</a>-->
+<!--    <a class="p-2 text-dark" href="/license">Лицензии</a>-->
+
+    <a class="p-2 text-dark btn btn-outline-success" href="/license/{{id_key}}/update">Лицензия - {{lic_f.fio}}</a>
+    <a class="p-2 text-dark btn btn-outline-warning" href="/create-key/{{id_key}}">Добавить ключ </a>
+  </nav>
+</div>
+    {% block body %}{% endblock %}
+<footer class="container pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+      <div class="col-12 col-md">
+<!--        <img class="mb-2" src="/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">-->
+        <img class="mb-2" src="/static/img/stamped.png" alt="" width="24" height="24">
+        <small class="d-block mb-3 text-muted">© 2022</small>
+      </div>
+    </div>
+  </footer>
+<!---->
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>-->
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.slim.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/qwerty.js') }}"></script>
+<!---->
+</body>
+</html>

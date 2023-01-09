@@ -1,0 +1,155 @@
+{% extends 'journal_base.html' %}
+
+{% block title %}
+Новая лицензия
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="card">
+    <form name="formName" method="post">
+      <!-- Card header -->
+      <div class="card-header">
+        <h4 class="fw-bold">Новый акт передачи</h4>
+      </div>
+
+      <!-- Card body -->
+      <div class="card-body">
+
+                  <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="fio_source"  class="form-label">Сотрудник 1</label>
+                         <p>
+            <select name="fio_source" class="form-control">
+                {% for emp in employee %}
+                    <option value="{{ emp.id }}">{{ emp.name }}</option>
+                {% endfor %}
+             </select>
+            </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="fio_receiver" class="form-label">Сотрудник 2</label>
+                <p>
+            <select name="fio_receiver" class="form-control">
+                {% for emp in employee %}
+                    <option value="{{ emp.id }}">{{ emp.name }}</option>
+                {% endfor %}
+             </select>
+            </p>
+
+                </div>
+              </div>
+        </div>
+<!--          -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="division" class="form-label"
+                           >Наименование организации получателя</label
+                      >
+                    <p>
+                    <select name="division" class="form-control">
+                        {% for opt in option %}
+                            <option value="{{ opt.id }}">{{ opt.division_name }}</option>
+                        {% endfor %}
+                     </select>
+                    </p>
+                </div>
+            </div>
+
+             <div class="col-md-6">
+                <div class="mb-3">
+            <label for="skzi" class="form-label">Наименование средств ЭП</label>
+            <p>
+                <select name="skzi" class="form-control">
+                    {% for sk in name_skzi %}
+                        <option value="{{ sk.id }}">{{ sk.n_skzi }}</option>
+                    {% endfor %}
+             </select>
+            </p>
+          </div>
+             </div>
+                </div>
+<!--          -->
+               <div class="row">
+          <div class="col-md-6">
+        <div class="mb-3">
+           <label for="comment" class="form-label">Примечание</label>
+                <input type="text" name="comment" class="form-control" id="comment" placeholder="Примечание"/>
+
+          </div>
+           </div>
+             <div class="col-md-2">
+              <div class="mb-3">
+                <label for="data" name="data" class="form-label">Получено:</label>
+                <input type="date" name="data" class="form-control" id="data" placeholder="Дата"/>
+<!--                <label for="comment" class="form-label">Примечание</label>-->
+<!--                <input type="text" name="comment" class="form-control" id="comment" placeholder="Примечание"/>-->
+              </div>
+            </div>
+               </div>
+<!--          -->
+        <div class="row">
+            <div class="col-md-6">
+              <div class="mb-6">
+                  <label for="key_sp" class="form-label">Список лицензий для передачи</label>
+                  {% for lic in lic_empty %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                              <input type="checkbox" name="key_sp" class="form-check-input" value="{{ lic.id }}">{{ lic.code }} + {{lic.id}}
+
+                        </label>
+                    </div>
+
+                {% endfor %}
+              </div>
+              </div>
+
+        </div>
+
+          <input type="hidden" name="submitType">
+
+      </div>
+
+      <!-- Card footer -->
+      <div class="card-footer">
+<!--        <button class="btn btn-danger">Отмена</button>-->
+           <a href="/journal" class="btn btn-danger">Отмена</a>
+<!--        <button type="submit" class="btn btn-primary">Ок</button>-->
+          <input type="submit" class="btn btn-success" name="JSP-2" onclick="setType('Buy')" value="Сохранить">
+          <input type="submit" class="btn btn-primary" value="Отправить">
+<!--          <input name="JSP-2" type="submit" onclick="setType('Buy')">-->
+      </div>
+    </form>
+       <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><font color="#8B0000">Внимание!</font> </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h4><font color="#006600">Сохраните карточку лицензии!</font></h4>
+<!--          <p class="mb-5">Сохраните карточку лицензии!</p>-->
+        </div>
+        <div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+<!--          <button type="button" class="btn btn-danger" data-dismiss="modal">Ок</button>-->
+<!--             <button type="button" class="btn btn-danger" data-dismiss="modal">Ок</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--        -->
+  </div>
+</div>
+
+{% endblock %}

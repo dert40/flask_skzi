@@ -1,0 +1,90 @@
+{% extends 'base_search.html' %}
+
+{% block title %}
+Резльтаты поиска
+{% endblock %}
+
+{% block body %}
+ {% set ns = namespace(counter=0) %}
+<div class="container-fluid">
+
+     	<div class="tableFixHead" id="samples_data_div">
+
+    {% if sp|length >0 %}
+
+            <table class="table-light" id="samples_data_table"> <!-- Подошло-->
+                     <thead>
+    <tr>
+      <!-- <th class="text-center" scope="col" style="width:3%; height: 50pt;">#</th> -->
+<!--        <th class="text-center" scope="col" style="width:3%">id</th>-->
+<!-- 	   <th class="text-center" scope="col" style="width:3%">#</th>-->
+<!--      <th class="text-center" scope="col" style="width:15%">Учетный номер</th>-->
+<!--      <th class="text-center" scope="col" style="width:20%">Наименование криптосредства</th>-->
+<!--      <th class="text-center" scope="col" style="width:10%"> Серийные номера СКЗИ</th>-->
+<!--        <th class="text-center" scope="col" style="width:18%">Номера экземпляров (копий)</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">От кого получены</th>-->
+<!--        <th class="text-center" scope="col" style="width:30%">Дата и номер сопр. письма</th>-->
+<!--      <th class="text-center" scope="col" style="width:15%">Ф.И.О. владельца криптосредства </th>-->
+<!--      <th class="text-center" scope="col" style="width:20%">Дата получения</th>-->
+<!--      <th class="text-center" scope="col" style="width:10%">Ф.И.О. пр-шего подкл. (установку)</th>-->
+<!--        <th class="text-center" scope="col" style="width:18%">Дата подключения (установки)</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Инвентарный (сер.) номер апп-х средств</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Дата изъятия (уничтожения)</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Ф.И.О. отв., пр. изъятие (уничтожение) СКЗИ</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Номер акта или расписка об уничтожении</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Примечание</th>-->
+                <th class="text-center" scope="col" style="width:3%">id</th>
+ 	   <th class="text-center" scope="col" style="width:3%">#</th>
+      <th class="text-center" scope="col" style="width:6%">Учетный номер</th>
+      <th class="text-center" scope="col" style="width:6%">Наименование криптосредства</th>
+      <th class="text-center" scope="col" style="width:6%"> Серийные номера СКЗИ</th>
+        <th class="text-center" scope="col" style="width:6%">Номера экземпляров (копий)</th>
+        <th class="text-center" scope="col" style="width:6%">От кого получены</th>
+        <th class="text-center" scope="col" style="width:6%">Дата и номер сопр. письма</th>
+      <th class="text-center" scope="col" style="width:6%">Ф.И.О. владельца криптосредства </th>
+      <th class="text-center" scope="col" style="width:6%">Дата получения</th>
+      <th class="text-center" scope="col" style="width:6%">Ф.И.О. пр-шего подкл. (установку)</th>
+        <th class="text-center" scope="col" style="width:6%">Дата подключения (установки)</th>
+        <th class="text-center" scope="col" style="width:6%">Инвентарный (сер.) номер апп-х средств</th>
+        <th class="text-center" scope="col" style="width:6%">Дата изъятия (уничтожения)</th>
+        <th class="text-center" scope="col" style="width:6%">Ф.И.О. отв., пр. изъятие (уничтожение) СКЗИ</th>
+        <th class="text-center" scope="col" style="width:6%">Номер акта или расписка об уничтожении</th>
+        <th class="text-center" scope="col" style="width:6%">Примечание</th>
+
+    </tr>
+	 </thead>
+   <tbody>
+   {% for el in sp %}
+       {% set ns.counter = ns.counter+1 %}
+      <tr class="target">
+           <td class="text-center">{{ el[0].id }}</td>
+          <td class="text-center" scope="row"><a href="/list/{{ el[0].id }}">{{ ns.counter }}</a></td>
+          <td><a href="#">{{ el[0].n_account }}</a></td>
+          <td class="text-center">{{ el[1].n_skzi }}</td>
+          <td class="text-center">{{ el[0].n_serial }}</td>
+          <td class="text-center">{{ el[0].n_instances }}</td>
+          <td class="text-center">{{ el[2].division_name }}</td>
+          <td class="text-center">{{ el[0].sopr_pis }}</td>
+          <td class="text-center">{{ el[6].name }}</td>
+          <td class="text-center">{{ el[0].date_rec.strftime('%d-%m-%Y') }}</td>
+          <td class="text-center">{{ el[7].name }}</td>
+          <td class="text-center">{{ el[0].date_con.strftime('%d-%m-%Y') }}</td>
+          <td class="text-center">{{ el[0].n_hardware }}</td>
+          <td class="text-center">{{ el[0].data_destr.strftime('%d-%m-%Y') }}</td>
+          <td class="text-center">{{ el[8].name }}</td>
+          <td class="text-center">{{ el[0].n_destr }}</td>
+          <td class="text-center">{{ el[0].note }}</td>
+      </tr>
+     {% endfor %}
+   </tbody>
+            </table>
+
+            {% else %}
+    <p>Не найдены записи в журнале</p>
+    {% endif %}
+
+  </div>
+ </div>
+
+<!--        -->
+{% endblock %}>

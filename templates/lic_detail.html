@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Лицензия
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="card">
+    <form method="post">
+      <!-- Card header -->
+      <div class="card-header">
+        <h4 class="fw-bold">Лицензия: {{ lic[0].fio }} - {{ lic[0].id }}</h4>
+      </div>
+
+      <!-- Card body -->
+      <div class="card-body">
+
+        <div class="mb-3">
+            <label for="fio" class="form-label">ФИО</label>
+            <input type="text" readonly name="fio" class="form-control" id="fio" value="{{ lic.T_license.fio }}" placeholder="ФИО"/>
+          </div>
+        <div class="mb-3">
+            <label for="division" class="form-label"
+                   >Подразделение</label
+              >
+<!--           <input type="text" name="division" class="form-control" id="division" value="{{ lic.T_division.division_name }}" placeholder="Подразделение"/>-->
+            <p>
+            <select disabled name="division" class="form-control">
+                {% for opt in option %}
+                 {% if opt.id == lic[1].id %}
+                    <option selected value="{{ opt.id }}">{{ opt.division_name }}</option>
+                   {% else %}
+                    <option value="{{ opt.id }}">{{ opt.division_name }}</option>
+                 {% endif %}
+
+                {% endfor %}
+             </select>
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="post" class="form-label">Должность</label>
+<!--            <input type="text" name="post" class="form-control" id="post" value="{{ lic.Post.POST_NAME }}" placeholder="post"/>-->
+   <p>
+            <select disabled name="post" class="form-control">
+                {% for pos in post_sp %}
+                 {% if pos.id == lic[3].id %}
+                    <option selected value="{{ pos.id }}">{{ pos.POST_NAME }}</option>
+                   {% else %}
+                    <option value="{{ pos.id }}">{{ pos.POST_NAME }}</option>
+                 {% endif %}
+                {% endfor %}
+             </select>
+   </p>
+<!--                <p>&ndash;&gt;-->
+<!--                <select name="post" class="form-control">-->
+<!--                    {% for pos in post_sp %}-->
+<!--                        <option value="{{ pos.id }}">{{ pos.POST_NAME }}</option>-->
+<!--                    {% endfor %}-->
+<!--             </select>-->
+<!--            </p>-->
+          </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="lic_code"  class="form-label">Лицензия</label>
+                  <input type="text" disabled name="lic_code" class="form-control" id="lic_code" value="{{ lic.T_license.license_code }}" placeholder="Лицензия"/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="lic_owner_id" class="form-label">Где оригинал</label>
+<!--                  <input type="text" name="lic_owner_id" class="form-control" id="lic_owner_id" value="{{ lic.Post.POST_NAME }}" placeholder="post"/>-->
+                   <p>
+            <select disabled name="lic_owner_id" class="form-control">
+                {% for opt_2 in option %}
+                 {% if opt_2.id == lic[2].id %}
+                    <option selected value="{{ opt_2.id }}">{{ opt_2.division_name }}</option>
+                   {% else %}
+                    <option value="{{ opt_2.id }}">{{ opt_2.division_name }}</option>
+                 {% endif %}
+
+                {% endfor %}
+             </select>
+            </p>
+<!--                <p>-->
+<!--            <select name="lic_owner_id" class="form-control">-->
+<!--                {% for opt in option %}-->
+<!--                    <option value="{{ opt.id }}">{{ opt.division_name }}</option>-->
+<!--                {% endfor %}-->
+<!--             </select>-->
+<!--            </p>-->
+
+                </div>
+              </div>
+        </div>
+
+         <div class="row">
+          <div class="col-md-6">
+              <div class="mb-3">
+                <label for="name_comp" name="license" class="form-label">Имя компьютера</label>
+                <input type="text" disabled name="name_comp" class="form-control" id="name_comp"  value="{{ lic.T_license.computer_name }}"placeholder="Имя компьютера "/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="comment" class="form-label">Примечание</label>
+                <input type="text"  disabled name="comment" class="form-control" id="comment"  value="{{ lic.T_license.comment }}" placeholder="Примечание"/>
+              </div>
+            </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md-6">
+              <div class="mb-3">
+                <label for="contract" class="form-label">Контракт</label>
+                <input type="text" disabled name="contract" class="form-control" id="contract"  value="{{ lic.T_license.contract }}" placeholder="Контракт"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="code" class="form-label">Код</label>
+                <input type="text" disabled name="code" class="form-control" id="code"  value="{{ lic.T_license.code }}" placeholder="Код"/>
+              </div>
+            </div>
+      </div>
+
+
+        <div class="mb-3">
+            <label for="system" class="form-label"
+                   >Ключи ЭП </label
+              >
+            <input type="text" disabled name="system" class="form-control" id="system" placeholder="Ключи ЭП"/>
+          </div>
+        <div class="mb-3">
+            <label for="key_es" class="form-label"
+                   >В каких системах используются</label
+              >
+<!--            <input type="text" disabled name="key_es" class="form-control" id="key_es" placeholder="В каких системах используются"/>-->
+                {% for sys in sys_sp %}
+                      {% if (sys.id,) in sys_con %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" disabled class="form-check-input" value="" checked>{{ sys.SYSTEM_NAME }}
+                        </label>
+                    </div>
+                {% else %}
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" disabled class="form-check-input" value="">{{ sys.SYSTEM_NAME }}
+
+                        </label>
+                    </div>
+                {% endif%}
+
+                {% endfor %}
+
+        </div>
+
+      </div>
+
+      <!-- Card footer -->
+      <div class="card-footer">
+<!--        <button class="btn btn-danger">Отмена</button>-->
+<!--        <button type="submit" class="btn btn-primary">Ок</button>-->
+<!--          <a class="p-2 text-dark" href="/license">Лицензии</a>-->
+          <a class="btn btn-danger" href="/license" role="button">Отмена</a>
+          <a class="btn btn-primary" href="/license/{{ lic[0].id }}/update" role="button">Изменить</a>
+<!--          <input type="submit" class="btn btn-primary" value="Изменить">-->
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

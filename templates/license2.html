@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Список лицензии
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+<h1>Список лицензии</h1>
+
+    {% if spisok_lic|length >0 %}
+
+    {% for el in spisok_lic %}
+    <div class="alert alert-info">
+        <h2>{{ el.fio }}</h2>
+        <p>{{ el.license_code }}</p>
+        <p><b>дата: {{ el.date_start }}</b></p>
+        <a href="/license/{{ el.id }}" class="btn btn-warning">Детальнее</a>
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <p>Нет лицензий на сайте</p>
+    {% endif %}
+</div>
+{% endblock %}>

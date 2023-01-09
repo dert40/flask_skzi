@@ -1,0 +1,341 @@
+{% extends 'base_sp.html' %}
+
+{% block title %}
+Журнал СКЗИ
+{% endblock %}
+
+<!--/////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+
+{% block body %}
+ {% set ns = namespace(counter=0) %}
+<!-- TABLE -->
+  {% if sp|length >0 %}
+<!--	<div>-->
+   <div  id="samples_data_div">
+
+		<table class="table table-striped" id="samples_data_table">
+
+			<thead class="header-sticky">
+
+			<tr>
+<!--				   <th>id-->
+<!--				   </th>-->
+				<th>
+					<p>#</p>
+				</th>
+					<th>
+						<p class="tab01">Учетный номер</p>
+						<div class="btnposition">
+							<button class="open-button bposition" onclick="openForm1()"><img id="qaz" src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm1">
+								<form action="#" method="get" name="Frm1">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+<!--										<input class="text-field__input" type="text" placeholder="..." value="">-->
+										<input class="text-field__input" type="search" name="q1" id="fn1" value="{{ request.args.get('q1', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs1">Применить</button>
+<!--									<button class="btn btn-outline-info btn-sm" type="submit">Применить</button>-->
+									<button class="button" type="button" onclick="closeForm1()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+
+					<th>
+						<p class="tab02">Наименование криптосредства</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm2()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm2">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+<!--										<input class="text-field__input" type="text" placeholder="..." value="">-->
+										<input class="text-field__input" type="search" name="q2" id="fn2" value="{{ request.args.get('q2', '') }}">
+									</div>
+									<button class="button" type="submit" id="2">Применить</button>
+									<button class="button" type="button" onclick="closeForm2()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+
+					<th>
+						<p class="tab03">Серийные номера СКЗИ</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm3()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm3">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+
+										<input class="text-field__input" type="search" name="q3" id="fn3" value="{{ request.args.get('q3', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs3">Применить</button>
+									<button class="button" type="button" onclick="closeForm3()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+
+					<th>
+						<p class="tab04">Номера экземпляров (копий)</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm4()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm4">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+										<input class="text-field__input" type="search" name="q4" id="fn4" value="{{ request.args.get('q4', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs4">Применить</button>
+									<button class="button" type="button" onclick="closeForm4()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+
+					<th>
+						<p class="tab05">От кого получены</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm5()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm5">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+										<input class="text-field__input" type="search" name="q5" id="fn5" value="{{ request.args.get('q5', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs5">Применить</button>
+									<button class="button" type="button" onclick="closeForm5()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab06">Дата и номер сопроводительного письма</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm6()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm6">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+										<input class="text-field__input" type="search" name="q6" id="fn6" value="{{ request.args.get('q6', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs6">Применить</button>
+									<button class="button" type="button" onclick="closeForm6()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab07">Ф.И.О. владельца криптосредства</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm7()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm7">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+									<input class="text-field__input" type="search" name="q7" id="fn7" value="{{ request.args.get('q7', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs7">Применить</button>
+									<button class="button" type="button" onclick="closeForm7()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab08">Дата получения</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm8()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+
+							<div class="form-popup" id="myForm8">
+
+								<form action="#" method="get">
+									<p>Фильтровать с</p>
+									<div class="text-field">
+<!--										<input class="text-field__input date_input" type="date" name="q8" id="fn8" value="{{ request.args.get('q8', '') }}">-->
+										<input type="date" class="text-field__input date_input" name="q8_1" class="form-control" id="q8_1" value="{{ request.args.get('q8_1', '') }}" placeholder="Дата получения"/>
+										<p>по</p>
+<!--										<input  class="text-field__input date_input" type="date" name="q8_1" id="date_rec1">-->
+										<input type="date" class="text-field__input date_input"  name="q8_2" class="form-control" id="q8_2" value="{{ request.args.get('q8_2', '') }}" placeholder="Дата получения"/>
+									</div>
+									<button class="button" type="submit" id="fs8">Применить</button>
+									<button class="button" type="button" onclick="closeForm8()">Закрыть</button>
+								</form>
+
+							</div>
+
+						</div>
+
+					</th>
+					<th>
+						<p class="tab09">Ф.И.О. пр-шего подкл. (установку)</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm9()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm9">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+<!--										<input class="text-field__input" type="text" placeholder="..." value="">-->
+										<input class="text-field__input" type="search" name="q9" id="fn9" value="{{ request.args.get('q9', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs9">Применить</button>
+									<button class="button" type="button" onclick="closeForm9()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab10">Дата подключения (установки)</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm10()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm10">
+								<form action="#" method="get">
+									<p>Фильтровать с</p>
+									<div class="text-field">
+<!--										<input class="text-field__input date_input" type="date" name="q8" id="fn8" value="{{ request.args.get('q8', '') }}">-->
+										<input type="date" class="text-field__input date_input" name="q10_1" id="q10_1" class="form-control"  value="{{ request.args.get('q10_1', '') }}" placeholder="Дата получения"/>
+										<p>по</p>
+<!--										<input  class="text-field__input date_input" type="date" name="q8_1" id="date_rec1">-->
+										<input type="date" class="text-field__input date_input"  name="q10_2" id="q10_2" class="form-control" value="{{ request.args.get('q10_2', '') }}" placeholder="Дата получения"/>
+									</div>
+									<button class="button" type="submit" id="fs10">Применить</button>
+									<button class="button" type="button" onclick="closeForm10()">Закрыть</button>
+								</form>
+
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab11">Инвентарный (сер.) номер апп-х средств</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm11()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm11">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+<!--										<input class="text-field__input" type="text" placeholder="..." value="">-->
+										<input class="text-field__input" type="search" name="q11" id="fn11" value="{{ request.args.get('q11', '') }}">
+
+									</div>
+									<button class="button" type="submit" id="fs11">Применить</button>
+									<button class="button" type="button" onclick="closeForm11()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab12">Дата изъятия (уничтожения)</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm12()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm12">
+									<form action="#" method="get">
+									<p>Фильтровать с</p>
+									<div class="text-field">
+<!--										<input class="text-field__input date_input" type="date" name="q8" id="fn8" value="{{ request.args.get('q8', '') }}">-->
+										<input type="date" class="text-field__input date_input" name="q12_1" id="q12_1" class="form-control"  value="{{ request.args.get('q12_1', '') }}" placeholder="Дата получения"/>
+										<p>по</p>
+<!--										<input  class="text-field__input date_input" type="date" name="q8_1" id="date_rec1">-->
+										<input type="date" class="text-field__input date_input"  name="q12_2" id="q12_2" class="form-control" value="{{ request.args.get('q12_2', '') }}" placeholder="Дата получения"/>
+									</div>
+									<button class="button" type="submit" id="fs12">Применить</button>
+									<button class="button" type="button" onclick="closeForm12()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab13">Ф.И.О. отв., пр. изъятие (уничтожение) СКЗИ</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm13()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm13">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+<!--										<input class="text-field__input" type="text" placeholder="..." value="">-->
+										<input class="text-field__input" type="search" name="q13" id="fn13" value="{{ request.args.get('q13', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs13">Применить</button>
+									<button class="button" type="button" onclick="closeForm13()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab14">Номер акта или расписка об уничтожении</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm14()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm14">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+<!--										<input class="text-field__input" type="text" placeholder="..." value="">-->
+										<input class="text-field__input" type="search" name="q14" id="fn14" value="{{ request.args.get('q14', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs14">Применить</button>
+									<button class="button" type="button" onclick="closeForm14()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+					<th>
+						<p class="tab15">Примечание</p>
+						<div class="btnposition">
+							<button class="open-button" onclick="openForm15()"><img src="/static/img/filtr.png" alt="" width="14" height="14"></button>
+							<div class="form-popup" id="myForm15">
+								<form action="#" method="get">
+									<p>Фильтровать по</p>
+									<div class="text-field">
+<!--										<input class="text-field__input" type="text" placeholder="..." value="">-->
+									<input class="text-field__input" type="search" name="q15" id="fn15" value="{{ request.args.get('q15', '') }}">
+									</div>
+									<button class="button" type="submit" id="fs15">Применить</button>
+									<button class="button" type="button" onclick="closeForm15()">Закрыть</button>
+								</form>
+							</div>
+						</div>
+					</th>
+				</tr>
+
+			</thead>
+
+			<tbody>
+            {% for el in sp %}
+       {% set ns.counter = ns.counter+1 %}
+			{% if ns.counter % 2 == 0 %}
+			  <tr class="white"  id="{{ el[0].id }}">
+				  {% else %}
+				  <tr class="grey"  id="{{ el[0].id }}">
+				  {% endif %}
+<!--                      <td class="text-center">{{ el[0].id }}</td>-->
+                      <td class="text-center" scope="row"><a href="/list/{{ el[0].id }}">{{ ns.counter }}</a></td>
+                      <td><a href="#">{{ el[0].n_account }}</a></td>
+                      <td class="text-center">{{ el[1].n_skzi }}</td>
+                      <td class="text-center">{{ el[0].n_serial }}</td>
+                      <td class="text-center">{{ el[0].n_instances }}</td>
+                      <td class="text-center">{{ el[2].division_name }}</td>
+                      <td class="text-center">{{ el[0].sopr_pis }}</td>
+                      <td class="text-center">{{ el[6].name }}</td>
+                      <td class="text-center">{{ el[0].date_rec.strftime('%d-%m-%Y') }}</td>
+                      <td class="text-center">{{ el[7].name }}</td>
+                      <td class="text-center">{{ el[0].date_con.strftime('%d-%m-%Y') }}</td>
+                      <td class="text-center">{{ el[0].n_hardware }}</td>
+                      <td class="text-center">{{ el[0].data_destr.strftime('%d-%m-%Y') }}</td>
+                      <td class="text-center">{{ el[8].name }}</td>
+                      <td class="text-center">{{ el[0].n_destr }}</td>
+                      <td class="text-center">{{ el[0].note }}</td>
+			  </tr>
+            {% endfor %}
+						</tbody>
+		</table>
+
+	</div>
+	{% else %}
+    <div class="inf_clear">
+<!--    		<h2>Нет данных на сайте</h2>-->
+		<img id="logo2" src="{{ url_for('static', filename='img/no.jpeg') }}">
+	</div>
+    {% endif %}
+
+<!--        -->
+{% endblock %}>

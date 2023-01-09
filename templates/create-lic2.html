@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Новая лицензия
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="card">
+    <form name="formName" method="post">
+      <!-- Card header -->
+      <div class="card-header">
+        <h4 class="fw-bold">Новая лицензия</h4>
+      </div>
+
+      <!-- Card body -->
+      <div class="card-body">
+
+        <div class="mb-3">
+            <label for="fio" class="form-label">ФИО</label>
+            <input type="text" name="fio" class="form-control" id="fio" placeholder="ФИО"/>
+          </div>
+        <div class="mb-3">
+            <label for="division" class="form-label"
+                   >Подразделение</label>
+            <p>
+            <select name="division" class="form-control">
+                {% for opt in option %}
+                    <option value="{{ opt.id }}">{{ opt.division_name }}</option>
+                {% endfor %}
+             </select>
+            </p>
+        </div>
+        <div class="mb-3">
+            <label for="post" class="form-label">Должность</label>
+            <p>
+                <select name="post" class="form-control">
+                    {% for pos in post_sp %}
+                        <option value="{{ pos.id }}">{{ pos.POST_NAME }}</option>
+                    {% endfor %}
+             </select>
+            </p>
+          </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="lic_code"  class="form-label">Лицензия</label>
+                  <input type="text" name="code" class="form-control" id="code" placeholder="Лицензия"/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="lic_owner_id" class="form-label">Где оригинал</label>
+                <p>
+            <select name="lic_owner_id" class="form-control">
+                {% for opt in option %}
+                    <option value="{{ opt.id }}">{{ opt.division_name }}</option>
+                {% endfor %}
+             </select>
+            </p>
+
+                </div>
+              </div>
+        </div>
+
+         <div class="row">
+          <div class="col-md-6">
+              <div class="mb-3">
+                <label for="name_comp" name="license" class="form-label">Имя компьютера</label>
+                <input type="text" name="name_comp" class="form-control" id="name_comp" placeholder="Имя компьютера"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="comment" class="form-label">Примечание</label>
+                <input type="text" name="comment" class="form-control" id="comment" placeholder="Примечание"/>
+              </div>
+            </div>
+      </div>
+
+          <div class="row">
+          <div class="col-md-6">
+              <div class="mb-3">
+                <label for="contract" class="form-label">Контракт</label>
+                <input type="text" name="contract" class="form-control" id="contract" placeholder="Контракт"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="code" class="form-label">Код</label>
+                <input type="text" name="lic_code" class="form-control" id="lic_code" placeholder="Код"/>
+              </div>
+            </div>
+      </div>
+
+
+<!--          -->
+          <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="key" class="form-label">Ключи ЭП</label>
+<!--                    <a class="btn btn-secondary col-md-12" href="#" role="button">Список ключей ЭП</a>-->
+<!--                    <button class="btn btn-secondary col-md-12">Список ключей ЭП</button>-->
+                    <input class="btn btn-secondary col-md-12" data-toggle="modal" data-target="#modal" href="#" role="button" value="Список ключей ЭП">
+                </div>
+    </div>
+           <div class="col-md-6">
+              <div class="mb-3">
+
+              </div>
+            </div>
+
+      </div>
+<!--          -->
+        <div class="mb-3">
+            <label for="system" class="form-label">В каких системах используются</label>
+<!--            <input type="text" name="system" class="form-control" id="system" placeholder="В каких системах используются"/>-->
+                {% for sys in sys_sp %}
+
+                    <div class="form-check">
+                        <label class="form-check-label">
+                        <input type="checkbox" name="list" class="form-check-input" value="{{ sys.id }}">{{ sys.SYSTEM_NAME }} + {{sys.id}}
+
+                        </label>
+                    </div>
+
+                {% endfor %}
+
+        </div>
+          <input type="hidden" name="submitType">
+
+      </div>
+
+      <!-- Card footer -->
+      <div class="card-footer">
+<!--        <button class="btn btn-danger">Отмена</button>-->
+           <a href="/license" class="btn btn-danger">Отмена</a>
+<!--        <button type="submit" class="btn btn-primary">Ок</button>-->
+          <input type="submit" class="btn btn-success" name="JSP-2" onclick="setType('Buy')" value="Сохранить">
+          <input type="submit" class="btn btn-primary" value="Отправить">
+<!--          <input name="JSP-2" type="submit" onclick="setType('Buy')">-->
+      </div>
+    </form>
+       <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><font color="#8B0000">Внимание!</font> </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h4><font color="#006600">Сохраните карточку лицензии!</font></h4>
+<!--          <p class="mb-5">Сохраните карточку лицензии!</p>-->
+        </div>
+        <div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+<!--          <button type="button" class="btn btn-danger" data-dismiss="modal">Ок</button>-->
+<!--             <button type="button" class="btn btn-danger" data-dismiss="modal">Ок</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--        -->
+  </div>
+</div>
+
+{% endblock %}

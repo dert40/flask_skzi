@@ -1,0 +1,341 @@
+{% extends 'base_spisok.html' %}
+
+{% block title %}
+Журнал СКЗИ
+{% endblock %}
+
+{% block body %}
+ {% set ns = namespace(counter=0) %}
+<div class="container-fluid">
+
+     	<div class="tableFixHead" id="samples_data_div">
+
+    {% if sp|length >0 %}
+
+            <table class="table-light" id="samples_data_table"> <!-- Подошло-->
+                     <thead>
+    <tr>
+      <!-- <th class="text-center" scope="col" style="width:3%; height: 50pt;">#</th> -->
+<!--        <th class="text-center" scope="col" style="width:3%">id</th>-->
+<!-- 	   <th class="text-center" scope="col" style="width:3%">#</th>-->
+<!--      <th class="text-center" scope="col" style="width:15%">Учетный номер</th>-->
+<!--      <th class="text-center" scope="col" style="width:20%">Наименование криптосредства</th>-->
+<!--      <th class="text-center" scope="col" style="width:10%"> Серийные номера СКЗИ</th>-->
+<!--        <th class="text-center" scope="col" style="width:18%">Номера экземпляров (копий)</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">От кого получены</th>-->
+<!--        <th class="text-center" scope="col" style="width:30%">Дата и номер сопр. письма</th>-->
+<!--      <th class="text-center" scope="col" style="width:15%">Ф.И.О. владельца криптосредства </th>-->
+<!--      <th class="text-center" scope="col" style="width:20%">Дата получения</th>-->
+<!--      <th class="text-center" scope="col" style="width:10%">Ф.И.О. пр-шего подкл. (установку)</th>-->
+<!--        <th class="text-center" scope="col" style="width:18%">Дата подключения (установки)</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Инвентарный (сер.) номер апп-х средств</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Дата изъятия (уничтожения)</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Ф.И.О. отв., пр. изъятие (уничтожение) СКЗИ</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Номер акта или расписка об уничтожении</th>-->
+<!--        <th class="text-center" scope="col" style="width:20%">Примечание</th>-->
+                <th class="text-center" scope="col" style="width:3%">id</th>
+ 	   <th class="text-center" scope="col" style="width:3%"><br>#<br><br><br>1</th>
+      <th class="text-center" scope="col" style="width:6%"><br>Учетный номер
+            <br><br>2 <a href="#" onclick="openForm1()">&#9660;</a>
+<!--          <button class="open-button" onclick="openForm()">&#9660;</button>-->
+
+                <div class="form-popup" id="myForm1">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №2</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q1" id="fn1" value="{{ request.args.get('q1', '') }}">
+                          </p>
+                          <p>
+<!--                            <button type="submit"  class="btn btn-outline-info btn-sm"   id="fs1">Отправить</button>-->
+                               <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc1" onclick="closeForm1()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+
+      </th>
+      <th class="text-center" scope="col" style="width:6%"><br>Наименование криптосредства
+         <br><br> 3<a href="#" onclick="openForm2()">&#9660;</a>
+<!--                <a id="show1" href="#"> <font color="red" size="2px">&#128269;</font></a>-->
+           <div class="form-popup" id="myForm2">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №3</p>
+                          <p>
+                                <input class="form-control form-control-sm" type="search" name="q2" id="fn2" value="{{ request.args.get('q2', '') }}">
+                          </p>
+                          <p>
+                          <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc2" onclick="closeForm2()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+
+      </th>
+      <th class="text-center" scope="col" style="width:6%"> <br>Серийные номера СКЗИ
+           <br>4<a href="#" onclick="openForm3()">&#9660;</a>
+            <div class="form-popup" id="myForm3">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №4</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q3" id="fn3" value="{{ request.args.get('q3', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc3" onclick="closeForm3()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+      </th>
+        <th class="text-center" scope="col" style="width:6%"><br>Номера экземпляров (копий)
+            <br>5<a href="#" onclick="openForm4()">&#9660;</a>
+             <div class="form-popup" id="myForm4">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №5</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q4" id="fn4" value="{{ request.args.get('q4', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc4" onclick="closeForm4()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+        </th>
+        <th class="text-center" scope="col" style="width:6%"><br>От кого получены
+           <br><br>6<a href="#" onclick="openForm5()">&#9660;</a>
+             <div class="form-popup" id="myForm5">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №6</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q5" id="fn5" value="{{ request.args.get('q5', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc5" onclick="closeForm5()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+        </th>
+        <th class="text-center" scope="col" style="width:6%">Дата и номер сопр. письма
+            <br>7 <a href="#" onclick="openForm6()">&#9660;</a>
+             <div class="form-popup" id="myForm6">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №7</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q6" id="fn6" value="{{ request.args.get('q6', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc6" onclick="closeForm6()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+        </th>
+      <th class="text-center" scope="col" style="width:6%"><br>Ф.И.О. владельца криптосредства
+                <br>8 <a href="#" onclick="openForm7()">&#9660;</a>
+             <div class="form-popup" id="myForm7">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №8</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q7" id="fn7" value="{{ request.args.get('q7', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc7" onclick="closeForm7()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+
+      </th>
+      <th class="text-center" scope="col" style="width:6%"><br>Дата получения
+                <br><br>9 <a href="#" onclick="openForm8()">&#9660;</a>
+             <div class="form-popup" id="myForm8">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №9</p>
+                          <p>
+<!--                            <input class="form-control form-control-sm" type="search" name="q8" id="fn8" value="{{ request.args.get('q8', '') }}">-->
+                              <span style="position: absolute; left: 20px;">c</span>&nbsp;&nbsp;&nbsp;
+                              <input type="date" name="q8_1" class="form-control" id="date_rec1"
+                                     style="position: relative; left: 50px; width:130px" value="{{ request.args.get('q8_1', '') }}" placeholder="Дата получения"/>
+                              &nbsp;&nbsp;&nbsp; <span style="position: absolute; left: 20px;">по</span>
+                              <input type="date" name="q8_2" class="form-control" id="date_rec2" style="position: relative; left: 50px; width:130px" value="{{ request.args.get('q8_2', '') }}" placeholder="Дата получения"/>
+
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc8" onclick="closeForm8()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+      </th>
+      <th class="text-center" scope="col" style="width:6%"><br>Ф.И.О. пр-шего подкл. (установку)
+                     <br>10<a href="#" onclick="openForm9()">&#9660;</a>
+             <div class="form-popup" id="myForm9">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №10</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q9" id="fn9" value="{{ request.args.get('q9', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc9" onclick="closeForm9()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+      </th>
+        <th class="text-center" scope="col" style="width:6%"><br>Дата подключения (установки)
+                     <br>11<a href="#" onclick="openForm10()">&#9660;</a>
+             <div class="form-popup" id="myForm10">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №11</p>
+                          <p>
+<!--                            <input class="form-control form-control-sm" type="search" name="q10" id="fn10" value="{{ request.args.get('q10', '') }}">-->
+      <span style="position: absolute; left: 20px;">c</span>&nbsp;&nbsp;&nbsp;
+                              <input type="date" name="q11_1" class="form-control" id="q11_1"
+                                     style="position: relative; left: 50px; width:130px" value="{{ request.args.get('q11_1', '') }}" placeholder="Дата получения"/>
+                              &nbsp;&nbsp;&nbsp; <span style="position: absolute; left: 20px;">по</span>
+                              <input type="date" name="q11_2" class="form-control" id="q12_1" style="position: relative; left: 50px; width:130px" value="{{ request.args.get('q11_2', '') }}" placeholder="Дата получения"/>
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc10" onclick="closeForm10()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+        </th>
+        <th class="text-center" scope="col" style="width:6%"><br>Инвентарный (сер.) номер апп-х средств
+               <br>12<a href="#" onclick="openForm11()">&#9660;</a>
+             <div class="form-popup" id="myForm11">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №12</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q11" id="fn11" value="{{ request.args.get('q11', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc11" onclick="closeForm11()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+        </th>
+        <th class="text-center" scope="col" style="width:6%"><br>Дата изъятия (уничтожения)
+         <br> <br>13 <a href="#" onclick="openForm12()">&#9660;</a>
+             <div class="form-popup" id="myForm12">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №13</p>
+                          <p>
+<!--                            <input class="form-control form-control-sm" type="search" name="q12" id="fn12" value="{{ request.args.get('q12', '') }}">-->
+                              <span style="position: absolute; left: 20px;">c</span>&nbsp;&nbsp;&nbsp;
+                              <input type="date" name="q13_1" class="form-control" id="q13_1"
+                                     style="position: relative; left: 50px; width:130px" value="{{ request.args.get('q13_1', '') }}" placeholder="Дата получения"/>
+                              &nbsp;      &nbsp;&nbsp; <span style="position: absolute; left: 20px;">по</span>
+                              <input type="date" name="q13_2" class="form-control" id="q13_2" style="position: relative; left: 50px; width:130px" value="{{ request.args.get('q13_2', '') }}" placeholder="Дата получения"/>
+
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc12" onclick="closeForm12()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+
+        </th>
+        <th class="text-center" scope="col" style="width:6%">Ф.И.О. отв., пр. изъятие (уничтожение) СКЗИ
+             <br>14<a href="#" onclick="openForm13()">&#9660;</a>
+             <div class="form-popup" id="myForm13">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №14</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q13" id="fn13" value="{{ request.args.get('q13', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc13" onclick="closeForm13()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+
+        </th>
+        <th class="text-center" scope="col" style="width:6%">Номер акта или расписка об уничтожении
+               <br>15 <a href="#" onclick="openForm14()">&#9660;</a>
+             <div class="form-popup" id="myForm14">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №15</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q14" id="fn14" value="{{ request.args.get('q14', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc14" onclick="closeForm14()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+        </th>
+        <th class="text-center" scope="col" style="width:6%"><br><br>Примечание
+                   <br><br>16<a href="#" onclick="openForm15()">&#9660;</a>
+             <div class="form-popup" id="myForm15">
+                        <form action="#" method="get">
+                            <p>Фильтровать по столбцу №16</p>
+                          <p>
+                            <input class="form-control form-control-sm" type="search" name="q15" id="fn15" value="{{ request.args.get('q15', '') }}">
+                          </p>
+                          <p>
+                             <button class="btn btn-outline-info btn-sm" type="submit">Применить</button>
+                            &nbsp;&nbsp;&nbsp;
+                            <button type="button" class="btn btn-outline-dark btn-sm" id="fc15" onclick="closeForm15()">Закрыть</button>
+                          </p>
+                        </form>
+                </div>
+        </th>
+
+    </tr>
+	 </thead>
+   <tbody>
+   {% for el in sp %}
+       {% set ns.counter = ns.counter+1 %}
+      <tr class="target">
+           <td class="text-center">{{ el[0].id }}</td>
+          <td class="text-center" scope="row"><a href="/list/{{ el[0].id }}">{{ ns.counter }}</a></td>
+          <td><a href="#">{{ el[0].n_account }}</a></td>
+          <td class="text-center">{{ el[1].n_skzi }}</td>
+          <td class="text-center">{{ el[0].n_serial }}</td>
+          <td class="text-center">{{ el[0].n_instances }}</td>
+          <td class="text-center">{{ el[2].division_name }}</td>
+          <td class="text-center">{{ el[0].sopr_pis }}</td>
+          <td class="text-center">{{ el[6].name }}</td>
+          <td class="text-center">{{ el[0].date_rec.strftime('%d-%m-%Y') }}</td>
+          <td class="text-center">{{ el[7].name }}</td>
+          <td class="text-center">{{ el[0].date_con.strftime('%d-%m-%Y') }}</td>
+          <td class="text-center">{{ el[0].n_hardware }}</td>
+          <td class="text-center">{{ el[0].data_destr.strftime('%d-%m-%Y') }}</td>
+          <td class="text-center">{{ el[8].name }}</td>
+          <td class="text-center">{{ el[0].n_destr }}</td>
+          <td class="text-center">{{ el[0].note }}</td>
+      </tr>
+     {% endfor %}
+   </tbody>
+            </table>
+
+            {% else %}
+    <p>Нет лицензий на сайте</p>
+    {% endif %}
+
+  </div>
+ </div>
+
+<!--        -->
+{% endblock %}>

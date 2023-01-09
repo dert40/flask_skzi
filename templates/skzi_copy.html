@@ -1,0 +1,260 @@
+{% extends 'base_list_card.html' %}
+
+{% block title %}
+Новая запись в журнал СКЗИ
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="card">
+    <form name="formName" method="post">
+      <!-- Card header -->
+      <div class="card-header">
+        <h4 class="fw-bold">Новая запись в журнал СКЗИ</h4>
+      </div>
+
+      <!-- Card body -->
+      <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="name_cript"  class="form-label">Наименование криптосредства</label>
+                    <p>
+                        <select name="name_cript" class="form-control">
+                            {% for s in opt_skzi %}
+                                {% if s.id == sp[1].id %}
+                                    <option selected value="{{ s.id }}">{{ s.n_skzi }}</option>
+                                {% else %}
+                                    <option value="{{ s.id }}">{{ s.n_skzi }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="n_skzi" class="form-label">Серийные номера СКЗИ</label>
+                    <input type="text" name="n_skzi" class="form-control" id="n_skzi" value="{{ sp[0].n_serial }}" placeholder="Серийные номера СКЗИ"/>
+                </div>
+              </div>
+        </div>
+                  <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="n_instances"  class="form-label">Номера экземпляров (копий) </label>
+                  <input type="text" name="n_instances" class="form-control" id="n_instances"  value="{{ sp[0].n_instances }}" placeholder="Номера экземпляров (копий) "/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="div_sours" class="form-label">От кого получены</label>
+<!--                    <input type="text" name="div_sours" class="form-control" id="div_sours" placeholder="От кого получены "/>-->
+               <p>
+                        <select name="div_sours" class="form-control">
+                    {% for opt in option %}
+                               {% if opt.id == sp[2].id %}
+                                    <option selected value="{{ opt.id }}">{{ opt.division_name }}</option>
+                                {% else %}
+                                    <option value="{{ opt.id }}">{{ opt.division_name }}</option>
+                                {% endif %}
+                    {% endfor %}
+                        </select>
+               </p>
+
+                </div>
+              </div>
+        </div>
+          <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="sopr_pis"  class="form-label">Дата и номер сопроводительного письма</label>
+                  <input type="text" name="sopr_pis" class="form-control" id="sopr_pis" value="{{ sp[0].sopr_pis }}" placeholder="Дата и номер сопроводительного письма"/>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="fio_owner" class="form-label">Ф.И.О. владельца криптосредства</label>
+<!--                <input type="text" name="fio_owner" class="form-control" id="fio_owner" placeholder="Ф.И.О. владельца криптосредства"/>-->
+                 <p>
+                        <select name="fio_owner" class="form-control">
+                            {% for f in fio %}
+                                {% if f[0].id == sp[3].id %}
+                                    <option selected value="{{ f[0].id }}">{{ f[1].name }}</option>
+                                {% else %}
+                                    <option value="{{ f[0].id}}">{{ f[1].name }}</option>
+                                {% endif %}
+<!--                        <option value="{{ f[0].id }}">{{ f[1].name }}</option>-->
+                            {% endfor %}
+                        </select>
+               </p>
+                </div>
+              </div>
+        </div>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="fio_instal" class="form-label">Ф.И.О. производившего подключение (установку)</label>
+<!--                     <input type="text" name="fio_instal" class="form-control" id="fio_instal" placeholder="Ф.И.О. производившего подключение (установку)"/>-->
+               <p>
+                         <select name="fio_instal" class="form-control">
+                            {% for f in fio %}
+                                {% if f[0].id == sp[4].id %}
+                                    <option selected value="{{ f[0].id }}">{{ f[1].name}}</option>
+                                {% else %}
+                                    <option value="{{ f[0].id}}">{{ f[1].name  }}</option>
+                                {% endif %}
+<!--                        <option value="{{ f[0].id }}">{{ f[1].name }}</option>-->
+                            {% endfor %}
+                        </select>
+               </p>
+
+                </div>
+              </div>
+            <div class="col-md-3">
+                <div class="mb-3">
+                  <label for="date_rec"  class="form-label">Дата получения</label>
+                  <input type="date" name="date_rec" class="form-control" id="date_rec" value="{{ sp[0].date_rec.strftime('%Y-%m-%d')  }}" placeholder="Дата получения"/>
+<!--                    <input type="date" name="Date_rec" class="form-control" id="Date_rec" placeholder="Дата"/>   value="2017-06-01" .strftime('%d-%m-%Y') }}"-->
+                </div>
+              </div>
+
+        </div>
+          <div class="row">
+              <div class="col-md-6">
+                <div class="mb-3">
+                  <label for="n_hardware" class="form-label">Инвентарный (серийный) номер аппаратных средств</label>
+                    <input type="text" name="n_hardware" class="form-control" id="n_hardware" value="{{ sp[0].n_hardware }}" placeholder="Инвентарный (серийный) номер аппаратных средств"/>
+                </div>
+              </div>
+            <div class="col-md-3">
+                <div class="mb-3">
+                  <label for="date_con"  class="form-label">Дата подключения (установки)</label>
+                  <input type="date" name="date_con" class="form-control" id="date_con" value="{{ sp[0].date_con.strftime('%Y-%m-%d')  }}" placeholder="Дата подключения (установки)"/>
+                </div>
+              </div>
+
+        </div>
+
+         <div class="row">
+             <div class="col-md-6">
+              <div class="mb-3">
+                <label for="fio_destr" class="form-label">Ф.И.О. ответственного, производившего изъятие (уничтожение) СКЗИ</label>
+<!--                <input type="text" name="fio_destr" class="form-control" id="fio_destr" placeholder="Ф.И.О. ответственного, производившего изъятие (уничтожение) СКЗИ"/>-->
+                  <p>
+                        <select name="fio_destr" class="form-control">
+                            {% for f in fio %}
+                                {% if f[0].id == sp[5].id %}
+                                    <option selected value="{{ f[0].id }}">{{ f[1].name }}</option>
+                                {% else %}
+                                    <option value="{{ f[0].id}}">{{ f[1].name  }}</option>
+                                {% endif %}
+<!--                        <option value="{{ f[0].id }}">{{ f[1].name }}</option>-->
+                            {% endfor %}
+                        </select>
+                  </p>
+              </div>
+             </div>
+          <div class="col-md-3">
+              <div class="mb-3">
+                <label for="data_destr" name="license" class="form-label">Дата изъятия (уничтожения)</label>
+                <input type="date" name="data_destr" class="form-control" id="data_destr" value="{{ sp[0].data_destr.strftime('%Y-%m-%d') }}" placeholder="Дата изъятия (уничтожения)"/>
+              </div>
+            </div>
+
+      </div>
+
+          <div class="row">
+          <div class="col-md-6">
+              <div class="mb-3">
+                <label for="n_destr" class="form-label">Номер акта или расписка об уничтожении</label>
+                <input type="text" name="n_destr" class="form-control" id="n_destr" value="{{ sp[0].n_destr }}" placeholder="Номер акта или расписка об уничтожении"/>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="note" class="form-label">Примечание</label>
+                <input type="text" name="note" class="form-control" id="note" value="{{ sp[0].note }}"  placeholder="Примечание"/>
+              </div>
+            </div>
+      </div>
+
+
+<!--&lt;!&ndash;          &ndash;&gt;-->
+<!--          <div class="row">-->
+<!--            <div class="col-md-6">-->
+<!--                <div class="mb-3">-->
+<!--                    <label for="key" class="form-label">Ключи ЭП</label>-->
+<!--&lt;!&ndash;                    <a class="btn btn-secondary col-md-12" href="#" role="button">Список ключей ЭП</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button class="btn btn-secondary col-md-12">Список ключей ЭП</button>&ndash;&gt;-->
+<!--                    <input class="btn btn-secondary col-md-12" data-toggle="modal" data-target="#modal" href="#" role="button" value="Список ключей ЭП">-->
+<!--                </div>-->
+<!--    </div>-->
+<!--           <div class="col-md-6">-->
+<!--              <div class="mb-3">-->
+
+<!--              </div>-->
+<!--            </div>-->
+
+<!--      </div>-->
+<!--&lt;!&ndash;          &ndash;&gt;-->
+<!--        <div class="mb-3">-->
+<!--            <label for="system" class="form-label">В каких системах используются</label>-->
+<!--&lt;!&ndash;            <input type="text" name="system" class="form-control" id="system" placeholder="В каких системах используются"/>&ndash;&gt;-->
+<!--                {% for sys in sys_sp %}-->
+
+<!--                    <div class="form-check">-->
+<!--                        <label class="form-check-label">-->
+<!--                        <input type="checkbox" name="list" class="form-check-input" value="{{ sys.id }}">{{ sys.SYSTEM_NAME }} + {{sys.id}}-->
+
+<!--                        </label>-->
+<!--                    </div>-->
+
+<!--                {% endfor %}-->
+
+<!--        </div>-->
+<!--          <input type="hidden" name="submitType">-->
+
+<!--      </div>-->
+
+      <!-- Card footer -->
+      <div class="card-footer">
+<!--        <button class="btn btn-danger">Отмена</button>-->
+           <a href="/list" class="btn btn-danger">Отмена</a>
+<!--        <button type="submit" class="btn btn-primary">Ок</button>-->
+<!--          <input type="submit" class="btn btn-success" name="JSP-2" onclick="setType('Buy')" value="Сохранить">-->
+          <input type="submit" class="btn btn-primary" value="Отправить">
+<!--          <input name="JSP-2" type="submit" onclick="setType('Buy')">-->
+      </div>
+          </div>
+    </form>
+       <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel"><font color="#8B0000">Внимание!</font> </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <h4><font color="#006600">Сохраните карточку лицензии!</font></h4>
+<!--          <p class="mb-5">Сохраните карточку лицензии!</p>-->
+        </div>
+        <div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+<!--          <button type="button" class="btn btn-danger" data-dismiss="modal">Ок</button>-->
+<!--             <button type="button" class="btn btn-danger" data-dismiss="modal">Ок</button>-->
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--        -->
+  </div>
+</div>
+
+{% endblock %}

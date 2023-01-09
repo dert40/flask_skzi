@@ -1,0 +1,82 @@
+{% extends 'base_key.html' %}
+
+{% block title %}
+Список ключей
+{% endblock %}
+
+{% block body %}
+
+<!--<a class="btn btn-danger" href="{{url_for('view',var1='289', var2='26')}}" role="button">Тест</a>-->
+<!--<a class="btn btn-danger" href="{{url_for('key_delete',id_k='9', id_l='26')}}" role="button">Тест</a>-->
+
+<div class="container mt-5">
+      {% if spisok_key|length >0 %}
+<h4>{{spisok_key[0][1].fio}} - cписок ключей</h4>
+    <br>
+    {% set ns = namespace(counter=0) %}
+
+    <table class="table table-bordered table-striped table-hover">
+    <thead>
+    <tr>
+      <th class="text-center" scope="col" style="width:5%">#</th>
+      <th class="text-center" scope="col" style="width:20%">Удостоверяющий центр</th>
+      <th class="text-center" scope="col" style="width:10%">Действует по</th>
+      <th class="text-center" scope="col" style="width:15%">Гост</th>
+        <th class="text-center" scope="col" style="width:30%">Кто выдал</th>
+        <th class="text-center" scope="col" style="width:15%">Примечание</th>
+        <th class="text-center" scope="col" style="width:10%">Удалить</th>
+    </tr>
+   <tbody>
+      {% for el in spisok_key %}
+       {% set ns.counter = ns.counter+1 %}
+      <tr id='#userid{{ns.counter}}'>
+        <th class="text-center" scope="row">{{ ns.counter }}</th>
+<!--        <td>{{ el.fio }}</td>-->
+          <td>{{ el[3].CERTIFICATION_CENTER }}</a></td>
+<!--          <td>{{ el.id }}</td>-->
+        <td>{{ el[0].DATE_STOP.strftime('%d-%m-%Y') }}</td>
+        <td>{{ el[0].GOST }}</td>
+          <td>{{ el[2].division_name }}</td>
+          <td>{{ el[0].COMMENT }}</td>
+<!--          <td  class="text-center"><a href="#" class="btn btn-danger btn-sm">&#10008;</a></td>-->
+          <td class="text-center"> <a class="btn btn-danger"  data-toggle="modal" data-target="#modal" href="#" role="button" value='Get' onclick='Get({{ ns.counter }}, {{ el[0].id }}, {{ spisok_key[0][1].id }})'><font size="2">&#10008;</font></a></td>
+      </tr>
+    {% endfor %}
+
+      {% else %}
+    <p>Нет ключей на сайте</p>
+    {% endif %}
+    </tbody>
+  </thead>
+</table>
+
+</div>
+
+     <!-- Modal -->
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Удаление записи</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+<!--          <p class="mb-5">Удалить лицензию: </p>-->
+            <h6 class="md-3-mb-3" id="modal_body"></h6>
+        </div>
+        <div class="modal-footer">
+		  <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+
+<!--            <a class="btn btn-danger" data-toggle="modal" data-target="#modal" href="/license" role="button">Удалить</a>-->
+<!--             <a class="btn btn-primary" href="/license" role="button">Изменить</a>-->
+             <span id="where_to_insert"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--        -->
+{% endblock %}>
